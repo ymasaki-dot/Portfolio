@@ -1,0 +1,30 @@
+<p>新規投稿画面</p>
+
+<%= form_with model:@post, local:true do |f| %>
+<div class="form-group">
+  <%= f.label :post_image, "商品の画像" %>
+  <%= f.attachment_field :post_image, placeholder:'商品の画像' %>
+</div>
+<div class="form-group">
+  <%= f.label :name, "商品名" %>
+  <%= f.text_field :name, class: 'form-control', placeholder:'商品名' %>
+</div>
+<div class="form-group">
+  <%= f.label :category, "カテゴリー" %>
+  <%= f.select :category, [["キッチン", "キッチン"], ["バスルーム", "バスルーム"], ["クローゼット", "クローゼット"], ["リビング", "リビング"], ["トイレ", "トイレ"]], include_blank: "選択して下さい", class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.label :size, "商品の大きさ" %>
+  <%= f.text_field :size, class: 'form-control', placeholder:'たて○cm よこ◯cm 高さ○cm' %>
+</div>
+<div class="form-group">
+  <%= f.label :shop_url, "購入先URL" %>
+  <%= f.text_field :shop_url, class: 'form-control', placeholder:'購入先のURLを入力' %>
+</div>
+<div class="form-group">
+  <%= f.label :caption, "商品の説明" %>
+  <%= f.text_area :caption, rolw:'7' ,class: 'form-control', placeholder:'使用方法などを記載してください' %>
+</div>
+<%= f.submit '投稿する', class:'btn btn-primary' %>
+<% end %>
+
