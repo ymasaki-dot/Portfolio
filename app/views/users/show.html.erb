@@ -4,39 +4,26 @@
       <p class="h4 mt-4 mb-5">マイページ</p>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-md-12">
-      <div class="col-md-8 col-lg-5 mx-auto">
-        <%= attachment_image_tag @user, :profile_image, size:'200x200', fallback:'no_image.jpg' %>
-        <p>ユーザーネーム:<%= @user.name %></p>
+    <div class="col-md-4" style="background: #CCCCCC;">
+      <%= attachment_image_tag @user, :profile_image, size:'400x200', fallback:'no_image.jpg' %>
+    </div>
+    <div class="col-md-8" style="background: #DDDDDD;">
+      <p>ユーザーネーム:<%= @user.name %></p>
         <p>自己紹介:<%= @user.introduction %></p>
-        <%= link_to 'プロフィール編集', edit_user_path(@user) %>
-      </div>
+        <% if @user.id == current_user.id %>
+          <%= link_to 'プロフィール編集', edit_user_path(@user) %>
+        <% end %>
+    </div>
+  </div>
+
+
       <% @posts.each do |post| %>
       <div>
+        <%= link_to post_path(post) do %>
         <%= attachment_image_tag post, :post_image, size:'200x200',fallback:'no_image.jpg'%>
-        <%= post.name %>
+        <% end %>
+        <%= post.name %><br/>
+        <%= post.created_at.strftime('%Y/%m/%d') %><%= link_to '編集', edit_post_path(post) %><%= link_to '削除', post_path(post), method: :delete %>
       <% end %>
-
-
-
-
-
-<!--      <div class="card mb-3" style="max-width: 540px;">-->
-<!--      <div class="row g-0">-->
-<!--        <div class="col-md-4">-->
-<!--          <img src="..." class="card-img" alt="...">-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--          <div class="card-body">-->
-<!--            <h5 class="card-title">カードのタイトル</h5>-->
-<!--            <p class="card-text">...</p>-->
-<!--            <p class="card-text"><small class="text-muted">最終更新3分前</small></p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-

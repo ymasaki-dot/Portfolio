@@ -6,5 +6,19 @@
 <p>購入先:<%= @post.shop_url %></p>
 <p>説明:<%= @post.caption %></p>
 
+<div class="favorite-btn"><%= render "favorites/favorite-btn", post: @post %></div> <p class="comments_count">コメント件数：<%= @post.comments.count %></p>
+
+
+<% if @post.user == current_user %>
 <%= link_to '編集', edit_post_path(@post) %>
 <%= link_to '削除', post_path(@post.id), method: :delete %>
+<% end %>
+
+
+<%= form_with model:[@post, @post_comment] do |f| %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.submit "コメントする" %>
+<% end %>
+
+<div class="post_comments"><%= render "comments/index", post: @post %></div>
+
