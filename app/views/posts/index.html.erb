@@ -1,23 +1,53 @@
 <div class="col-md-12" style="background: #FF0000;  height: 50vh;">
+  <p>イメージ画像とキャッチコピー</p>
 </div>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-4" style="background: #FFFF99;">ランキング１</div>
-    <div class="col-md-4" style="background: #99FFFF;">ランキング２</div>
-    <div class="col-md-4" style="background: #FF99FF;">ランキング３</div>
+    <!--lastFavoritesはその投稿のいいね数を代入するための場所-->
+    <% lastFavorite = 0 %>
+    <!--jは順位を示す変数。記号は何でもよい。-->
+    <% j = 1 %>
+    <% @all_ranks.each.with_index(1) do |ranking,i| %>
+     <div class="card shadow-lg col-md-4">
+      <% if i == 1 %>
+       <% lastFavorite = ranking.favorites.count %>
+      <% end %>
+      <!--1位はelseの下に行き、2位以下はelseの上を回る-->
+      <% if ranking.favorites.count != lastFavorite %>
+       <% j = i %>
+       <p>第<%= j %>位</p>
+       <!--ユーザー名-->
+        <p><%= link_to ranking.user.name, user_path(ranking.user_id) %></p>
+       <!--投稿画像-->
+       <p>♥<%= ranking.favorites.count %> いいね</p>
+       <!--↓ここでfavorites.countをlastFavoritesに代入して上のlastFavoritesに代入する-->
+       <% lastFavorite = ranking.favorites.count %>
+      <% else %>
+       <% lastFavorite = ranking.favorites.count %>
+       <p>第<%= j %>位</p>
+       <p><%= link_to ranking.user.name, user_path(ranking.user_id) %></p>
+       <p>♥<%= ranking.favorites.count %> いいね</p>
+      <% end %>
+     </div>
+     <% end %>
   </div>
   <div class="row">
     <div class="col-md-4" style="background: #CCCCCC;">検索画面を表示</div>
-    <div class="col-md-8" style="background: #DDDDDD;">
+    <div class="col-md-8">
+      <h4>ALL Magis Strages</h4>
       <% @posts.each do |post| %>
-      <div>
+      <div class="card shadow-lg mb-3">
         <%= link_to post_path(post) do %>
         <%= attachment_image_tag post, :post_image, size:'50x50',fallback:'no_image.jpg'%>
         <% end %>
         <%= post.name %><br/>
-        <%= post.created_at.strftime('%Y/%m/%d') %><%= link_to '編集', edit_post_path(post) %><%= link_to '削除', post_path(post), method: :delete %>
-      <% end %>
+        <%= post.created_at.strftime('%Y/%m/%d') %>
+        <span class="text-right">
+          <%= link_to '編集', edit_post_path(post), class: 'btn btn-sm btn-success rounded-pill' %>
+          <%= link_to '削除', post_path(post), method: :delete,class: 'btn btn-sm btn-danger rounded-pill'  %>
+        </span>
     </div>
+    <% end %>
   </div>
 </div>
