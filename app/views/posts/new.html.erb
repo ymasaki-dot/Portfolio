@@ -15,7 +15,7 @@
           <p>商品名</p><%= f.text_field :name, class: 'form-control', placeholder:'商品名' %>
         </div>
         <div class="form-group">
-          <p>カテゴリー</p><%= f.select :category, [["キッチン", 1], ["バスルーム", "バスルーム"], ["クローゼット", "クローゼット"], ["リビング", "リビング"], ["トイレ", "トイレ"]], include_blank: "選択して下さい", class: 'form-control' %>
+          <p>カテゴリー</p><%= f.select :category, [["キッチン","キッチン" ], ["バスルーム", "バスルーム"], ["クローゼット", "クローゼット"], ["リビング", "リビング"], ["トイレ", "トイレ"]], include_blank: "選択して下さい", class: 'form-control' %>
         </div>
         <div class="form-group">
           <p>商品の大きさ</p><%= f.text_field :size, class: 'form-control', placeholder:'たて○cm よこ◯cm 高さ○cm' %>

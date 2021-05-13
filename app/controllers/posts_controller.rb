@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+    @categorys = Post.pluck(:category).uniq
   end
 
 
@@ -37,6 +38,14 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
+  end
+
+  def search
+    if params[:name].present?
+      @posts = Post.where('name LIKE ?', "%#{params[:name]}%")
+    else
+      @posts = Post.none
+    end
   end
 
   private

@@ -3,7 +3,7 @@
 <p>カテゴリ:<%= @post.category %></p>
 <p>投稿者:<%= @post.user.name %></p>
 <p>大きさ:<%= @post.size %></p>
-<p>購入先:<%= @post.shop_url %></p>
+<p>購入先:<%= Rinku.auto_link(@post.shop_url, :all, 'target="_blank"').html_safe %></p>
 <p>説明:<%= @post.caption %></p>
 
 <div class="favorite-btn"><%= render "favorites/favorite-btn", post: @post %></div> <p class="comments_count">コメント件数：<%= @post.comments.count %></p>
