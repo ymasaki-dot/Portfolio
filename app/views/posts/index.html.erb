@@ -18,7 +18,7 @@
        <% j = i %>
        <p>第<%= j %>位</p>
        <!--ユーザー名-->
-        <p><%= link_to ranking.user.name, user_path(ranking.user_id) %></p>
+       <p><%= link_to ranking.user.name, user_path(ranking.user_id) %></p>
        <!--投稿画像-->
        <p>♥<%= ranking.favorites.count %> いいね</p>
        <!--↓ここでfavorites.countをlastFavoritesに代入して上のlastFavoritesに代入する-->
@@ -34,20 +34,19 @@
   </div>
 
   <div class="row">
-    <div class="col-md-4" style="background: #CCCCCC;">
-      <div class="search-form">
-      <h4>商品名で検索</h4>
+    <div class="col-md-4">
+      <div class="search-form mt-4 mb-4">
       <%= form_with url: search_posts_path, method: :get, local: true do |f| %>
-        <%= f.text_field :name, placeholder:"何かお探しですか？" %>
-        <%= f.submit '検索', class: 'btn btn-sm btn-light' %>
+        <%= f.text_field :name, placeholder:"商品名"%>
+        <%= f.submit '検索', class: 'btn btn-sm btn-secondary ' %>
       <% end %>
       </div>
 
       <div class="search-form">
-      <table class="table table-bordered genre-table">
+      <table class="table table-bordered table-hover">
         <thead>
           <tr>
-            <th>カテゴリー検索</th>
+            <th>カテゴリー 検索</th>
           </tr>
         </thead>
         <tbody>
@@ -64,7 +63,7 @@
     </div>
 
     <div class="col-md-8">
-      <h4>ALL Magis Strages</h4>
+      <h4 class="mt-4 mb-4 text-center">ALL Magic Storages</h4>
       <%= render 'posts/index', posts: @posts %>
     </div>
 </div>
