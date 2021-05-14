@@ -43,8 +43,13 @@ class PostsController < ApplicationController
   def search
     if params[:name].present?
       @posts = Post.where('name LIKE ?', "%#{params[:name]}%")
-    else
-      @posts = Post.none
+    elsif
+      @posts = Post.where(category: "バスルーム")
+      @posts = Post.where(category: "クローゼット")
+      @posts = Post.where(category: "リビング")
+      @posts = Post.where(category: "キッチン")
+      @posts = Post.where(category: "トイレ")
+      # @posts = Post.none
     end
   end
 
