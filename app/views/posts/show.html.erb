@@ -1,24 +1,62 @@
-<p>画像:<%= attachment_image_tag @post, :post_image, size:'200x200',fallback:'no_image.jpg' %></p>
-<p>商品名:<%= @post.name %></p>
-<p>カテゴリ:<%= @post.category %></p>
-<p>投稿者:<%= @post.user.name %></p>
-<p>大きさ:<%= @post.size %></p>
-<p>購入先:<%= Rinku.auto_link(@post.shop_url, :all, 'target="_blank"').html_safe %></p>
-<p>説明:<%= @post.caption %></p>
-
-<div class="favorite-btn"><%= render "favorites/favorite-btn", post: @post %></div> <p class="comments_count">コメント件数：<%= @post.comments.count %></p>
-
-
-<% if @post.user == current_user %>
-<%= link_to '編集', edit_post_path(@post) %>
-<%= link_to '削除', post_path(@post.id), method: :delete %>
-<% end %>
-
-
-<%= form_with model:[@post, @post_comment] do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-  <%= f.submit "コメントする" %>
-<% end %>
-
-<div class="post_comments"><%= render "comments/index", post: @post %></div>
+<div class="container">
+  <div class="row mb-4 mx-auto">
+    <div class="col-md-12">
+      <p class="h4 mt-4 mb-5"> 詳細画面検索結果 </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <%= attachment_image_tag @post, :post_image, size:'350x450', fallback:'no_image.jpg' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <p>商品名 : <%= @post.name %></p>
+    </div>
+    <div class="col-md-6">
+      <p>投稿者:<%= @post.user.name %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <p>カテゴリ:<%= @post.category %></p>
+    </div>
+    <div class="col-md-6">
+      <p>大きさ:<%= @post.size %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p>購入先:<%= Rinku.auto_link(@post.shop_url, :all, 'target="_blank"').html_safe %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+    <div class="favorite-btn"><%= render "favorites/favorite-btn", post: @post %></div> <p class="comments_count">コメント件数：<%= @post.comments.count %></p>
+    </div>
+    <% if @post.user == current_user %>
+    <div class="col-md-3 mb-2">
+     <%= link_to '投稿を編集', edit_post_path(@post), class: "btn btn-primary" %>
+    </div>
+    <div class="col-md-3 mb-2">
+      <%= link_to '投稿を削除', post_path(@post.id), method: :delete, class: "btn btn-danger" %>
+    </div>
+    <% end %>
+  </div>
+  <%= form_with model:[@post, @post_comment] do |f| %>
+  <div class="row">
+    <div class="col-md-9">
+      <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: 'form-control'%>
+    </div>
+    <div class="col-md-3">
+      <%= f.submit "コメントする", class: "btn btn-success" %>
+    </div>
+  </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="post_comments"><%= render "comments/index", post: @post %></div>
+    </div>
+  </div>
+</div>
 

@@ -3,6 +3,7 @@
 </div>
 
 <div class="container">
+  <h4 class="mt-4 mb-4 text-center">人気商品ランキング</h4>
   <div class="row">
     <!--lastFavoritesはその投稿のいいね数を代入するための場所-->
     <% lastFavorite = 0 %>
@@ -17,16 +18,18 @@
       <% if ranking.favorites.count != lastFavorite %>
        <% j = i %>
        <p>第<%= j %>位</p>
-       <!--ユーザー名-->
-       <p><%= link_to ranking.user.name, user_path(ranking.user_id) %></p>
+       <!--投稿の商品名-->
+       <p><%= link_to ranking.name, post_path(ranking) %></p>
        <!--投稿画像-->
+       <%= attachment_image_tag ranking, :post_image, size:'120x120',fallback:'no_image.jpg' %>
        <p>♥<%= ranking.favorites.count %> いいね</p>
        <!--↓ここでfavorites.countをlastFavoritesに代入して上のlastFavoritesに代入する-->
        <% lastFavorite = ranking.favorites.count %>
       <% else %>
        <% lastFavorite = ranking.favorites.count %>
        <p>第<%= j %>位</p>
-       <p><%= link_to ranking.user.name, user_path(ranking.user_id) %></p>
+       <p><%= link_to ranking.name, post_path(ranking) %></p>
+        <%= attachment_image_tag ranking, :post_image, size:'120x120',fallback:'no_image.jpg' %>
        <p>♥<%= ranking.favorites.count %> いいね</p>
       <% end %>
      </div>
@@ -53,7 +56,7 @@
         <% @categorys.each do |category| %>
           <tr>
             <td>
-              <%= link_to category, search_posts_path, controller: "posts", action: "search", category: category %>
+              <%= link_to category, search_posts_path(category: category), controller: "posts", action: "search" %>
             </td>
           </tr>
         <% end %>
