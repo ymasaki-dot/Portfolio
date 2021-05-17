@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  # before_action :authenticate_user!
 
   def new
     @post =Post.new
@@ -7,8 +8,12 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to post_path(@post)
+    if @post.save
+       flash[:notice] = "投稿できました"
+       redirect_to post_path(@post)
+    else
+      render:new
+    end
   end
 
   def show
@@ -17,7 +22,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.page(params[:page]).per(5)
     @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
     @categorys = Post.pluck(:category).uniq
   end
@@ -42,10 +47,12 @@ class PostsController < ApplicationController
 
   def search
     if params[:name].present?
-      @posts = Post.where('name LIKE ?', "%#{params[:name]}%")
+      @posts = Post.where('name LIKE ?', "%#{params[:name]}%").page(params[:page]).per(10)
     elsif params[:category].present?
-      @posts = Post.where(category: params[:category])
-      # @posts = Post.none
+      @posts = Post.where(category: params[:category]).page(params[:page]).per(10)
+    else
+      @posts = Post.none
+      flash[:notice] = "検索したい商品名を入力してください"
     end
   end
 

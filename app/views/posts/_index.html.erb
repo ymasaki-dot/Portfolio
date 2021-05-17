@@ -14,8 +14,10 @@
           <span class="comments_count ml-1">コメント件数: <%= post.comments.count %></span>
           <span class="ml-1">投稿者: <%= post.user.name %></span>
           <span class="ml-1">投稿日: <%= post.created_at.strftime('%Y/%m/%d') %></span>
-          <%= link_to '編集', edit_post_path(post), class: 'btn btn-sm btn-success' %>
-          <%= link_to '削除', post_path(post), method: :delete,class: 'btn btn-sm btn-danger'  %>
+          <% if post.user == current_user %>
+            <%= link_to '編集', edit_post_path(post), class: 'btn btn-sm btn-success' %>
+            <%= link_to '削除', post_path(post), method: :delete,class: 'btn btn-sm btn-danger'  %>
+          <% end %>
         </small></p>
       </div>
     </div>

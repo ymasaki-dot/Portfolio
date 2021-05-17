@@ -2,6 +2,16 @@
   <div class="row mb-4 mx-auto">
     <div class="col-md-12">
       <p class="h4 mt-4 mb-5">商品新規登録</p>
+      <p class="text-danger">
+        <% if @post.errors.any? %>
+        <%= @post.errors.count %>件のエラーがあります:
+        <% @post.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+        <% end %>
+      <% end %>
+      </p>
     </div>
   </div>
   <div class="row">
