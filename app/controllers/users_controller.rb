@@ -8,12 +8,9 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if @post.user == current_user
-      render :edit
-    else
-      redirect_to root_path
+    if @user.id != current_user.id
+     redirect_to user_path(current_user.id)
     end
-
   end
 
   def update
