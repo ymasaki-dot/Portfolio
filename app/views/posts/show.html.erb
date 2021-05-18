@@ -11,53 +11,49 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
-      <p>商品名 : <%= @post.name %></p>
-    </div>
-    <div class="col-md-6">
-      <p>投稿者:<%= @post.user.name %></p>
+    <div class="col-md-12 mt-2">
+      <table class="table table-bordered">
+          <tr>
+            <th>商品名</th>
+            <td><%= @post.name %></td>
+          </tr>
+          <tr>
+            <th>投稿者</th>
+            <td><%= @post.user.name %></td>
+          </tr>
+          <tr>
+            <th>カテゴリ</th>
+            <td><%= @post.category %></td>
+          </tr>
+          <tr>
+            <th>大きさ</th>
+            <td><%= @post.size %></td>
+          </tr>
+          <tr>
+            <th>購入先</th>
+            <td><%= Rinku.auto_link(@post.shop_url, :all, 'target="_blank"').html_safe %></td>
+          </tr>
+      </table>
+      <div class="text-light">
+         <div class="favorite-btn mt-2 mb-2"><%= render "favorites/favorite-btn", post: @post %></div>
+        <% if @post.user == current_user %>
+          <%= link_to '投稿を編集', edit_post_path(@post), class: "btn btn-sm btn-outline-primary" %>
+          <%= link_to '投稿を削除', post_path(@post.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-sm btn-outline-danger" %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
-      <p>カテゴリ:<%= @post.category %></p>
-    </div>
-    <div class="col-md-6">
-      <p>大きさ:<%= @post.size %></p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <p>購入先:<%= Rinku.auto_link(@post.shop_url, :all, 'target="_blank"').html_safe %></p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-    <div class="favorite-btn"><%= render "favorites/favorite-btn", post: @post %></div> <p class="comments_count">コメント件数：<%= @post.comments.count %></p>
-    </div>
-    <% if @post.user == current_user %>
-    <div class="col-md-3 mb-2">
-     <%= link_to '投稿を編集', edit_post_path(@post), class: "btn btn-primary" %>
-    </div>
-    <div class="col-md-3 mb-2">
-      <%= link_to '投稿を削除', post_path(@post.id), method: :delete, class: "btn btn-danger" %>
-    </div>
-    <% end %>
-  </div>
-  <%= form_with model:[@post, @post_comment] do |f| %>
-  <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12 mt-2">
+      <%= form_with model:[@post, @post_comment] do |f| %>
       <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: 'form-control'%>
-    </div>
-    <div class="col-md-3">
-      <%= f.submit "コメントする", class: "btn btn-success" %>
+      <%= f.submit "コメントする", class: "btn btn-sm btn-outline-secondary mt-2" %>
+      <% end %>
     </div>
   </div>
-  <% end %>
   <div class="row">
     <div class="col-md-12">
       <div class="post_comments"><%= render "comments/index", post: @post %></div>
     </div>
   </div>
 </div>
-

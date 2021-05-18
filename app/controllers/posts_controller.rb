@@ -1,15 +1,14 @@
 class PostsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def new
-    @post =Post.new
+    @post = Post.new
   end
 
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-       flash[:notice] = "投稿できました"
        redirect_to post_path(@post)
     else
       render:new
@@ -30,6 +29,11 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    if @post.user == current_user
+      render :edit
+    else
+      redirect_to root_path
+    end
   end
 
   def update

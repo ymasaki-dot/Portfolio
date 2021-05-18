@@ -20,7 +20,7 @@
         <tr>
           <td>
           <% if @user.id == current_user.id %>
-            <%= link_to 'プロフィール編集', edit_user_path(@user), class:'btn btn-primary'%>
+            <%= link_to 'プロフィール編集', edit_user_path(@user), class:'btn btn-sm btn-outline-primary'%>
           <% end %>
           </td>
         </tr>

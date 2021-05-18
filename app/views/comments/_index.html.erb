@@ -1,22 +1,13 @@
+<table class="table mt-2">
 <% post.comments.each do |comment| %>
-<div class="card  shadow-lg mb-3">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <%= attachment_image_tag comment.user, :profile_image, size:'200x130',fallback:'no_image.jpg' %>
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"><%= comment.comment %></h5>
-        <p class="card-text"><small class="text-muted">
-          <span class="fas fa-heart heart_red ml-1"><%= post.favorites.count %></span>
-          <span class="comments_count ml-1">コメント件数: <%= post.comments.count %></span>
-          <span class="ml-1">投稿者: <%= comment.user.name %></span>
-          <span class="ml-1">投稿日: <%= comment.created_at.strftime('%Y/%m/%d') %></span>
-          <%= link_to '編集', edit_post_path(post), class: 'btn btn-sm btn-success' %>
-          <%= link_to 'コメントを削除', post_comment_path(comment.post,comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
-        </small></p>
-      </div>
-    </div>
-  </div>
-</div>
+  <tr>
+    <td> <%= attachment_image_tag comment.user, :profile_image, size:'50x50',fallback:'no_image.jpg' %></td>
+    <td><%= comment.comment %></td>
+    <td><%= link_to comment.user.name, user_path(comment.user) %></td>
+    <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+    <% if comment.user == current_user %>
+      <td><%= link_to 'コメントを削除', post_comment_path(comment.post,comment), method: :delete, remote: true, class: "btn btn-sm btn-outline-danger" %></td>
+    <% end %>
+  </tr>
 <% end %>
+</table>
