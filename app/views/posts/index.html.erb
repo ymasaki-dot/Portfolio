@@ -18,10 +18,10 @@
       <% if ranking.favorites.count != lastFavorite %>
        <% j = i %>
        <p>第<%= j %>位</p>
-       <!--投稿の商品名-->
        <p><%= link_to ranking.name, post_path(ranking) %></p>
-       <!--投稿画像-->
-       <%= attachment_image_tag ranking, :post_image, size:'120x120',fallback:'no_image.jpg' %>
+       <%= link_to post_path(ranking) do %>
+         <%= attachment_image_tag ranking, :post_image, size:'120x120',fallback:'no_image.jpg' %>
+       <% end %>
        <p>♥<%= ranking.favorites.count %> いいね</p>
        <!--↓ここでfavorites.countをlastFavoritesに代入して上のlastFavoritesに代入する-->
        <% lastFavorite = ranking.favorites.count %>
@@ -29,7 +29,9 @@
        <% lastFavorite = ranking.favorites.count %>
        <p>第<%= j %>位</p>
        <p><%= link_to ranking.name, post_path(ranking) %></p>
-        <%= attachment_image_tag ranking, :post_image, size:'120x120',fallback:'no_image.jpg' %>
+       <%= link_to post_path(ranking) do %>
+         <%= attachment_image_tag ranking, :post_image, size:'120x120',fallback:'no_image.jpg' %>
+       <% end %>
        <p>♥<%= ranking.favorites.count %> いいね</p>
       <% end %>
      </div>
@@ -41,7 +43,7 @@
       <div class="search-form mt-4 mb-4">
       <%= form_with url: search_posts_path, method: :get, local: true do |f| %>
         <%= f.text_field :name, placeholder:"商品名"%>
-        <%= f.submit '検索', class: 'btn btn-sm btn-outline-secondary ' %>
+        <%= f.submit '検索', class: 'btn btn-sm btn-outline-secondary' %>
       <% end %>
       </div>
 

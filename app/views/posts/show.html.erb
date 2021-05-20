@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row mb-4 mx-auto">
     <div class="col-md-12">
-      <p class="h4 mt-4 mb-5"> 詳細画面検索結果 </p>
+      <p class="h4 mt-4 mb-5"> "<%= @post.name %>" の詳細 </p>
     </div>
     <%= flash[:notice] %>
   </div>
@@ -18,10 +18,6 @@
             <td><%= @post.name %></td>
           </tr>
           <tr>
-            <th>投稿者</th>
-            <td><%= @post.user.name %></td>
-          </tr>
-          <tr>
             <th>カテゴリ</th>
             <td><%= @post.category %></td>
           </tr>
@@ -30,8 +26,16 @@
             <td><%= @post.size %></td>
           </tr>
           <tr>
+            <th>商品の説明</th>
+            <td><%= @post.caption %></td>
+          </tr>
+          <tr>
             <th>購入先</th>
             <td><%= Rinku.auto_link(@post.shop_url, :all, 'target="_blank"').html_safe %></td>
+          </tr>
+          <tr>
+            <th>投稿者</th>
+            <td><%= link_to @post.user.name, user_path(@post.user) %></td>
           </tr>
       </table>
       <div class="text-light">

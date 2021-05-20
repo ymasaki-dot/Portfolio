@@ -2,7 +2,6 @@
   <div class="row mb-4 mx-auto">
     <div class="col-md-12">
       <p class="h4 mt-4 mb-5">マイページ</p>
-      <%= flash[:notice] %>
     </div>
   </div>
   <div class="row">
@@ -29,6 +28,7 @@
   </div>
   <div class="col-md-12">
    <%= render 'posts/index', posts: @posts %>
+  </div>
 </div>
 
 
