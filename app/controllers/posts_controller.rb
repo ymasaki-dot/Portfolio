@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.page(params[:page]).per(5)
+    @posts = Post.page(params[:page]).per(10).order(created_at:"desc")
     @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
     @categorys = Post.pluck(:category).uniq
   end
@@ -29,18 +29,19 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    if @post.user == current_user
-      render :edit
-    else
-      redirect_to root_path
+    if @post.user != current_user
+     redirect_to root_path
     end
   end
 
   def update
     @post = Post.find(params[:id])
     @post.user_id = current_user.id
-    @post.update(post_params)
-    redirect_to post_path(@post)
+    if @post.update(post_params)
+       redirect_to post_path(@post)
+    else
+      render:edit
+    end
   end
 
   def destroy

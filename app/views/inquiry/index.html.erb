@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <%= form_for @inquiry, :url => inquiry_confirm_path do |f| %>
+      <%= form_with model:@inquiry, url:inquiry_confirm_path, local:true do |f| %>
         <% if @inquiry.errors.any? %>
           <div class="alert alert-danger" role="alert">
             <strong>入力内容にエラーがあります</strong>
@@ -17,22 +17,23 @@
             </ul>
           </div>
         <% end %>
-        <table class="table">
-          <tr>
-            <th>名前<span class="text-danger">（必須）</span></th>
-            <td><%= f.text_field :name %></td>
-          </tr>
-          <tr>
-            <th>メールアドレス<span class="text-danger">（必須）</span></th>
-            <td><%= f.text_field :email %></td>
-          </tr>
-          <tr>
-            <th>お問い合わせ内容</th>
-            <td><%= f.text_area :message %></td>
-          </tr>
-        </table>
-        <%= f.submit '確認', class: 'btn btn-primary' %>
-      <% end %>
+        <div class="form-group">
+          <%= f.label :name, "ユーザーネーム" %><span class="text-danger">（必須）</span>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email, "メールアドレス" %><span class="text-danger">（必須）</span>
+          <%= f.email_field :email, class: 'form-control'%>
+        </div>
+        <div class="form-group">
+          <%= f.label :message, "お問合せ内容" %>
+          <%= f.text_area :message, rows:'7', class: 'form-control' %>
+        </div>
+          <%= f.submit '確認画面に進む', class:'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+

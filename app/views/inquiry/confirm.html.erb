@@ -6,8 +6,8 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <%= form_for @inquiry, :url => inquiry_thanks_path do |f| %>
-        <table class="table">
+      <%= form_with model:@inquiry, url:inquiry_thanks_path, local:true do |f| %>
+        <table class="table"> 
           <tr>
             <th>名前</th>
             <td>
