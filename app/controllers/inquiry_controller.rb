@@ -7,7 +7,6 @@ class InquiryController < ApplicationController
   def confirm
     @inquiry = Inquiry.new(params[:inquiry].permit(:name, :email, :message))
     if @inquiry.valid?
-      # OK。確認画面を表示
       render :action => 'confirm'
     else
       # NG。入力画面を再表示

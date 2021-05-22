@@ -57,7 +57,6 @@ class PostsController < ApplicationController
       @posts = Post.where(category: params[:category]).page(params[:page]).per(10)
     else
       @posts = Post.none
-      flash[:notice] = "検索したい商品名を入力してください"
     end
   end
 
