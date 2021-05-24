@@ -9,6 +9,6 @@ class Post < ApplicationRecord
   end
 
   validates :name, presence: true
-  validates :category, presence: true,length: { maximum:20 }
-  validates :caption, presence: true,length: { maximum:500 }
+  validates :category, presence: true, length: { maximum: 20 }
+  validates :caption, presence: true, length: { maximum: 500 }
 end
