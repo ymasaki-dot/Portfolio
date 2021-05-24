@@ -8,7 +8,7 @@ class Post < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
-  validates :name, presence: true
-  validates :category, presence: true, length: { maximum: 20 }
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :category, presence: true, length: { maximum: 10 }
   validates :caption, presence: true, length: { maximum: 500 }
 end
