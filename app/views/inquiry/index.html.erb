@@ -18,18 +18,60 @@
           </div>
         <% end %>
         <div class="form-group">
-          <%= f.label :name, "ユーザーネーム" %><span class="text-danger">（必須）</span>
-          <%= f.text_field :name, class: 'form-control' %>
+          <%= f.label :name, "名前" %><span class="text-danger">（必須）</span>
+          <%= f.text_field :name, class: 'form-control', placeholder: "例)令和太郎" %>
         </div>
         <div class="form-group">
           <%= f.label :email, "メールアドレス" %><span class="text-danger">（必須）</span>
-          <%= f.email_field :email, class: 'form-control'%>
+          <%= f.email_field :email, class: 'form-control', placeholder: "example@com"%>
         </div>
         <div class="form-group">
-          <%= f.label :message, "お問合せ内容" %>
-          <%= f.text_area :message, rows:'7', class: 'form-control' %>
+          <p>お問合せの種類を選択してください<span class="text-danger">（必須）</span></p>
+          <div>
+            <%= f.radio_button :category, :'アプリについて' %>
+            <%= f.label :category, "アプリについて" %>
+          </div>
+          <div>
+            <%= f.radio_button :category, :'運営者への問い合わせ' %>
+            <%= f.label :category, '運営者への問い合わせ' %>
+          </div>
+          <div>
+            <%= f.radio_button :category, :'退会、再登録について' %>
+            <%= f.label :category, '退会、再登録について' %>
+          </div>
+          <div>
+            <%= f.radio_button :category, :'その他' %>
+            <%= f.label :category, 'その他' %>
+          </div>
         </div>
-          <%= f.submit '確認画面に進む', class:'btn btn-primary' %>
+        <div class="form-group">
+          <%= f.label :message, 'お問合せ内容' %>
+          <%= f.text_area :message, rows:'7', class: 'form-control', placeholder:'こちらにお問合せ内容を入力してください' %>
+        </div>
+        <div class="form-group">
+          <p>アプリの評価をお聞かせください<span class="text-danger">（必須）</span></p>
+          <div>
+            <%= f.radio_button :evaluation, :'知人に勧めたい' %>
+            <%= f.label :evaluation, '知人に勧めたい' %>
+          </div>
+          <div>
+            <%= f.radio_button :evaluation, :'使いやすいが勧めたくはない' %>
+            <%= f.label :evaluation, '使いやすいが勧めたくはない' %>
+          </div>
+          <div>
+            <%= f.radio_button :evaluation, :'使いにくい、改善が必要な箇所がある' %>
+            <%= f.label :evaluation, '使いにくい、改善が必要な箇所がある' %>
+          </div>
+          <div>
+            <%= f.radio_button :evaluation, :'その他' %>
+            <%= f.label :evaluation, 'その他' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :feedback, '使いにくい、その他を選択した方はご記入ください' %>
+          <%= f.text_area :feedback, rows:'7', class: 'form-control', placeholder:'入力してください' %>
+        </div>
+          <%= f.submit '確認画面に進む', class:'btn btn-sm btn-primary mb-5' %>
           <% end %>
         </div>
       </div>

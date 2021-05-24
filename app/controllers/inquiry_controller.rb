@@ -1,25 +1,24 @@
 class InquiryController < ApplicationController
+  before_action :authenticate_user!
+
+
   def index
     @inquiry = Inquiry.new
-    render :action => 'index'
+    render:index
   end
 
   def confirm
-    @inquiry = Inquiry.new(params[:inquiry].permit(:name, :email, :message))
+    @inquiry = Inquiry.new(params[:inquiry].permit(:name, :email, :category, :message, :evaluation, :feedback))
     if @inquiry.valid?
-      render :action => 'confirm'
+      render:confirm
     else
-      # NG。入力画面を再表示
-      render :action => 'index'
+      render:index
     end
   end
 
   def thanks
-    # メール送信
-    @inquiry = Inquiry.new(params[:inquiry].permit(:name, :email, :message))    
+    @inquiry = Inquiry.new(params[:inquiry].permit(:name, :email, :category, :message, :evaluation, :feedback))
     InquiryMailer.received_email(@inquiry).deliver
-
-    # 完了画面を表示
-    render :action => 'thanks'
+    render:thanks
   end
 end

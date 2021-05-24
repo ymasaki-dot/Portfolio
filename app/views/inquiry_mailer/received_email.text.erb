@@ -1,8 +1,16 @@
 Webサイトからお問い合わせがありました。
 
 --------------------------
-Name: <%= @inquiry.name %>
-Email: <%= @inquiry.email %>
-Message:
+名前: <%= @inquiry.name %>
+メールアドレス: <%= @inquiry.email %>
+
+お問合せの種類: <%= @inquiry.category %>
+<お問合せ内容>
 <%= @inquiry.message %>
+
+アプリの評価: <%= @inquiry.evaluation %>
+<ご意見/ご感想>
+<%= @inquiry.feedback %>
+
+
 --------------------------

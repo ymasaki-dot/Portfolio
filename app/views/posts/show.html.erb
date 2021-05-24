@@ -6,11 +6,11 @@
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
-      <%= attachment_image_tag @post, :post_image, size:'350x450', fallback:'no_image.jpg' %>
+      <%= attachment_image_tag @post, :post_image, size:'300x300', fallback:'no_image.jpg' %>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 mt-2">
+    <div class="col-md-12 mt-4">
       <table class="table table-bordered">
           <tr>
             <th>商品名</th>
@@ -54,7 +54,7 @@
         <%= f.submit "コメントする", class: "btn btn-sm btn-outline-secondary mt-2" %>
         <% end %>
       <% else %>
-        <p class="text-center">いいね！やコメントを残すには " <%= link_to '会員登録', new_user_registration_path %> " が必要です</p>
+        <p class="text-center mt-5"><strong>いいね！やコメントを残すには " <%= link_to '会員登録', new_user_registration_path %> " が必要です</strong></p>
       <% end %>
     </div>
   </div>
