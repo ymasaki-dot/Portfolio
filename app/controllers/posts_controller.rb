@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.page(params[:page]).per(10).order(created_at: 'desc')
     @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
-    @categorys = Post.pluck(:category)
+    @categorys = Post.pluck(:category).uniq
   end
 
   def edit
